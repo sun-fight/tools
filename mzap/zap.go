@@ -100,7 +100,7 @@ func getEncoderConfig() (config zapcore.EncoderConfig) {
 		StacktraceKey:  _zapConfig.StacktraceKey,
 		LineEnding:     zapcore.DefaultLineEnding,
 		EncodeLevel:    zapcore.LowercaseLevelEncoder,
-		EncodeTime:     CustomTimeEncoder,
+		EncodeTime:     customTimeEncoder,
 		EncodeDuration: zapcore.SecondsDurationEncoder,
 		EncodeCaller:   zapcore.FullCallerEncoder,
 	}
@@ -127,7 +127,7 @@ func getEncoder() zapcore.Encoder {
 	return zapcore.NewConsoleEncoder(getEncoderConfig())
 }
 
-func GetWriteSyncer() (zapcore.WriteSyncer, error) {
+func getWriteSyncer() (zapcore.WriteSyncer, error) {
 	fileWriter, err := rotatelogs.New(
 		path.Join(_zapConfig.Director, "%Y-%m-%d.log"),
 		rotatelogs.WithMaxAge(7*24*time.Hour),
@@ -141,7 +141,7 @@ func GetWriteSyncer() (zapcore.WriteSyncer, error) {
 
 // getEncoderCore 获取Encoder的zapcore.Core
 func getEncoderCore() (core zapcore.Core) {
-	writer, err := GetWriteSyncer() // 使用file-rotatelogs进行日志分割
+	writer, err := getWriteSyncer() // 使用file-rotatelogs进行日志分割
 	if err != nil {
 		fmt.Printf("Get Write Syncer Failed err:%v", err.Error())
 		return
@@ -149,8 +149,8 @@ func getEncoderCore() (core zapcore.Core) {
 	return zapcore.NewCore(getEncoder(), writer, _level)
 }
 
-// CustomTimeEncoder 自定义日志输出时间格式
-func CustomTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
+// customTimeEncoder 自定义日志输出时间格式
+func customTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(t.Format(_zapConfig.Prefix + "2006/01/02 - 15:04:05.000"))
 }
 
