@@ -1,15 +1,15 @@
-package mzap_test
+package uzap_test
 
 import (
-	"github.com/sun-fight/tools/mzap"
+	"github.com/sun-fight/tools/uzap"
 	"testing"
 )
 
 func Test(t *testing.T) {
-	mzap.InitZap(&mzap.ZapConfig{
+	uzap.InitZap(&uzap.ZapConfig{
 		Level:         "error",
 		Format:        "console",
-		Prefix:        "[mzap]",
+		Prefix:        "[uzap]",
 		Director:      "log",
 		LinkName:      "latest_log",
 		ShowLine:      true,
@@ -17,5 +17,5 @@ func Test(t *testing.T) {
 		StacktraceKey: "stacktrace",
 		LogInConsole:  true,
 	})
-	mzap.Glog.Error("test err")
+	uzap.Glog.Error("test err")
 }

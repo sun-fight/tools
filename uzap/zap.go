@@ -1,4 +1,4 @@
-package mzap
+package uzap
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ type ZapConfig struct {
 var _zapConfig = &ZapConfig{
 	Level:         "info",
 	Format:        "console",
-	Prefix:        "[mzap]",
+	Prefix:        "[uzap]",
 	Director:      "log",
 	LinkName:      "latest_log",
 	ShowLine:      true,
@@ -39,10 +39,10 @@ var _zapConfig = &ZapConfig{
 	LogInConsole:  true,
 }
 
-// mzap.InitZap(&mzap.ZapConfig{
+// uzap.InitZap(&uzap.ZapConfig{
 // 	Level:         "error",
 // 	Format:        "console",
-// 	Prefix:        "[mzap]",
+// 	Prefix:        "[uzap]",
 // 	Director:      "log",
 // 	LinkName:      "latest_log",
 // 	ShowLine:      true,

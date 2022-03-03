@@ -1,4 +1,4 @@
-module github.com/sun-fight/tools/mzap
+module github.com/sun-fight/tools/uzap
 
 go 1.17
 
